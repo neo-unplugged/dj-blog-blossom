@@ -78,17 +78,6 @@ WSGI_APPLICATION = 'blossom.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'defaultdb',  # Replace with your database name
-#         'USER': 'avnadmin',       # Replace with your PostgreSQL username
-#         'PASSWORD': 'AVNS_ZGun_pVu84A4xbJmZcx',   # Replace with your PostgreSQL password
-#         'HOST': 'pg-magnum00-blossom-poetry.c.aivencloud.com',           # Change if using a remote server
-#         'PORT': '22436',                # Default PostgreSQL port
-#     }
-# }
-
 
 DATABASES = {
     'default': {
