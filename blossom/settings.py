@@ -78,28 +78,28 @@ WSGI_APPLICATION = 'blossom.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'defaultdb',  # Replace with your database name
-        'USER': 'avnadmin',       # Replace with your PostgreSQL username
-        'PASSWORD': 'AVNS_ZGun_pVu84A4xbJmZcx',   # Replace with your PostgreSQL password
-        'HOST': 'pg-magnum00-blossom-poetry.c.aivencloud.com',           # Change if using a remote server
-        'PORT': '22436',                # Default PostgreSQL port
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DB_NAME'),  # Replace with your database name
-#         'USER': os.getenv('DB_USER'),       # Replace with your PostgreSQL username
-#         'PASSWORD': os.getenv('DB_PASSWORD'),   # Replace with your PostgreSQL password
-#         'HOST': os.getenv('DB_HOST'),           # Change if using a remote server
-#         'PORT': os.getenv('DB_PORT'),                # Default PostgreSQL port
+#         'NAME': 'defaultdb',  # Replace with your database name
+#         'USER': 'avnadmin',       # Replace with your PostgreSQL username
+#         'PASSWORD': 'AVNS_ZGun_pVu84A4xbJmZcx',   # Replace with your PostgreSQL password
+#         'HOST': 'pg-magnum00-blossom-poetry.c.aivencloud.com',           # Change if using a remote server
+#         'PORT': '22436',                # Default PostgreSQL port
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),  # Replace with your database name
+        'USER': os.getenv('DB_USER'),       # Replace with your PostgreSQL username
+        'PASSWORD': os.getenv('DB_PASSWORD'),   # Replace with your PostgreSQL password
+        'HOST': os.getenv('DB_HOST'),           # Change if using a remote server
+        'PORT': os.getenv('DB_PORT'),                # Default PostgreSQL port
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
