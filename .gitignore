@@ -8,6 +8,7 @@ staticfiles
 # deployment related
 .vercel/
 .env
+.envv
 
 # node related
 node_modules/
