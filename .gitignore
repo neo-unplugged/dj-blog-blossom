@@ -3,7 +3,7 @@ pyenv/
 __pycache__/
 
 # static files
-#staticfiles
+staticfiles
 
 # deployment related
 .vercel/
