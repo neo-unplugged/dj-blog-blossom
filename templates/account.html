@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Account Details
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg">
+        <div class="flex">
+            <!-- Vertical Tabs Section -->
+            <div class="w-1/4 bg-gray-200 p-4 rounded-l-lg">
+                <ul class="space-y-4">
+                    <li>
+                        <a href="#personal-info"
+                            class="block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg {% if active_tab == 'personal' %}bg-pink-200{% endif %}">
+                            Personal Info *
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#linked-accounts"
+                            class="block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg {% if active_tab == 'linked' %}bg-pink-200{% endif %}">
+                            Linked Accounts
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#deactivate-delete"
+                            class="block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg {% if active_tab == 'deactivate' %}bg-pink-200{% endif %}">
+                            Deactivate/Delete
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Form Section -->
+            <div class="w-3/4 p-6">
+                <!-- Personal Info Form -->
+                <div id="personal-info"
+                    class="tab-content {% if active_tab == 'personal' %}block{% else %}hidden{% endif %}">
+                    <h2 class="text-2xl font-bold mb-4">Personal Info</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-gray-700">Name</label>
+                                <input type="text" name="name" id="name" class="w-full p-2 border rounded-lg"
+                                    value="{{ user.name }}" required>
+                            </div>
+                            <div>
+                                <label for="nationality" class="block text-gray-700">Nationality</label>
+                                <input type="text" name="nationality" id="nationality"
+                                    class="w-full p-2 border rounded-lg" value="{{ user.nationality }}" required>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600">
+                                    Save Personal Info
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Linked Accounts Form -->
+                <div id="linked-accounts"
+                    class="tab-content {% if active_tab == 'linked' %}block{% else %}hidden{% endif %}">
+                    <h2 class="text-2xl font-bold mb-4">Linked Accounts</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="space-y-4">
+                            <div>
+                                <label for="nickname" class="block text-gray-700">Nickname</label>
+                                <input type="text" name="nickname" id="nickname" class="w-full p-2 border rounded-lg"
+                                    value="{{ user.nickname }}">
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600">
+                                    Save Linked Accounts
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Deactivate/Delete Form -->
+                <div id="deactivate-delete"
+                    class="tab-content {% if active_tab == 'deactivate' %}block{% else %}hidden{% endif %}">
+                    <h2 class="text-2xl font-bold mb-4">Deactivate/Delete</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="space-y-4">
+                            <div>
+                                <label for="nid" class="block text-gray-700">NID</label>
+                                <input type="text" name="nid" id="nid" class="w-full p-2 border rounded-lg"
+                                    value="{{ user.nid }}">
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">
+                                    Deactivate Account
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
