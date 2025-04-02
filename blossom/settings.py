@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,10 +10,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7b%w99plq5-c-at2=gwa67xc%h6t34-^by4)a#-s*nn$-pjexh'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-7b%w99plq5-c-at2=gwa67xc%h6t34-^by4)a#-s*nn$-pjexh')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [ '127.0.0.1', '.vercel.app']
 
@@ -70,13 +71,35 @@ WSGI_APPLICATION = 'blossom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'defaultdb',  # Replace with your database name
+        'USER': 'avnadmin',       # Replace with your PostgreSQL username
+        'PASSWORD': 'AVNS_ZGun_pVu84A4xbJmZcx',   # Replace with your PostgreSQL password
+        'HOST': 'pg-magnum00-blossom-poetry.c.aivencloud.com',           # Change if using a remote server
+        'PORT': '22436',                # Default PostgreSQL port
     }
 }
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DB_NAME'),  # Replace with your database name
+#         'USER': os.getenv('DB_USER'),       # Replace with your PostgreSQL username
+#         'PASSWORD': os.getenv('DB_PASSWORD'),   # Replace with your PostgreSQL password
+#         'HOST': os.getenv('DB_HOST'),           # Change if using a remote server
+#         'PORT': os.getenv('DB_PORT'),                # Default PostgreSQL port
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -102,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
 USE_I18N = True
 
