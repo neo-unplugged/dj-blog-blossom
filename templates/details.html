@@ -8,10 +8,30 @@ Blossom Poetry - {{ content.title }}
 <!-- Content Section: Details -->
 <div class="container mx-auto p-6">
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div class="p-6 text-center">
-            <h2 class="text-3xl font-bold text-gray-800">{{ content.title }}</h2>
-            <p class="text-gray-600 mt-2 text-sm">{{ content.author }}</p>
-            <p class="text-gray-600 mt-4 text-lg">{{ content.content }}</p>
+        <div class="p-6">
+            <h2 class="text-3xl font-bold text-gray-800 text-center">{{ content.title }}</h2>
+            <p class="text-gray-600 mt-2 text-sm text-center">By {{ content.author }}</p>
+
+            {% if content.type == "poem" %}
+            <div class="mt-6 text-lg text-gray-800 text-center italic" style="white-space: pre-wrap;">
+                {{ content.content }}
+            </div>
+
+            {% elif content.type == "story" %}
+            <div class="mt-6 text-lg text-gray-800 text-justify leading-loose">
+                {{ content.content }}
+            </div>
+
+            {% elif content.type == "article" %}
+            <div class="mt-6 text-lg text-gray-800 text-left leading-relaxed">
+                {{ content.content | safe }}
+            </div>
+
+            {% else %}
+            <div class="mt-6 text-lg text-gray-800 text-center">
+                {{ content.content }}
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

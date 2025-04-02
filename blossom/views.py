@@ -71,10 +71,14 @@ def login_view(request):
 
 # Account View
 def account_view(request):
-    active_tab = 'personal'  # Default active tab
-    if 'tab' in request.GET:
-        active_tab = request.GET['tab']  # Update based on the query parameter
-    return render(request, 'account.html', {'active_tab': active_tab})
+    active_tab = request.GET.get('tab', 'personal')  # Default to 'personal'
+    
+    context = {
+        'active_tab': active_tab,
+        'user': request.user  # Pass the current user object to the template
+    }
+    
+    return render(request, 'account.html', context)
 
 
 # Signup View

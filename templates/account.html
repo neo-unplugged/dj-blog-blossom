@@ -9,23 +9,26 @@ Account Details
     <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg">
         <div class="flex">
             <!-- Vertical Tabs Section -->
-            <div class="w-1/4 bg-gray-200 p-4 rounded-l-lg">
+            <div class="w-1/4 p-4 rounded-l-lg">
                 <ul class="space-y-4">
                     <li>
-                        <a href="#personal-info"
-                            class="block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg {% if active_tab == 'personal' %}bg-pink-200{% endif %}">
-                            Personal Info *
+                        <a href="#" onclick="showTab('personal-info')"
+                            class="tab-link block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg bg-pink-200"
+                            data-target="personal-info">
+                            Personal Info
                         </a>
                     </li>
                     <li>
-                        <a href="#linked-accounts"
-                            class="block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg {% if active_tab == 'linked' %}bg-pink-200{% endif %}">
+                        <a href="#" onclick="showTab('linked-accounts')"
+                            class="tab-link block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg"
+                            data-target="linked-accounts">
                             Linked Accounts
                         </a>
                     </li>
                     <li>
-                        <a href="#deactivate-delete"
-                            class="block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg {% if active_tab == 'deactivate' %}bg-pink-200{% endif %}">
+                        <a href="#" onclick="showTab('deactivate-delete')"
+                            class="tab-link block p-2 text-xl font-semibold text-gray-700 hover:bg-pink-300 rounded-lg"
+                            data-target="deactivate-delete">
                             Deactivate/Delete
                         </a>
                     </li>
@@ -35,8 +38,7 @@ Account Details
             <!-- Form Section -->
             <div class="w-3/4 p-6">
                 <!-- Personal Info Form -->
-                <div id="personal-info"
-                    class="tab-content {% if active_tab == 'personal' %}block{% else %}hidden{% endif %}">
+                <div id="personal-info" class="tab-content block">
                     <h2 class="text-2xl font-bold mb-4">Personal Info</h2>
                     <form method="post">
                         {% csrf_token %}
@@ -44,13 +46,22 @@ Account Details
                             <div>
                                 <label for="name" class="block text-gray-700">Name</label>
                                 <input type="text" name="name" id="name" class="w-full p-2 border rounded-lg"
-                                    value="{{ user.name }}" required>
+                                    value="{{ request.user.username }}" required>
                             </div>
                             <div>
-                                <label for="nationality" class="block text-gray-700">Nationality</label>
-                                <input type="text" name="nationality" id="nationality"
-                                    class="w-full p-2 border rounded-lg" value="{{ user.nationality }}" required>
+                                <label for="birthday" class="block text-gray-700">Birthday</label>
+                                <input type="date" name="birthday" id="birthday" class="w-full p-2 border rounded-lg"
+                                    value="{{ user.birthday}}" required>
                             </div>
+
+                            <div>
+                                <label for="gender" class="block text-gray-700">Gender</label>
+                                <input type="radio" name="gender" id="gender" class="p-2 border rounded-lg" value="male"
+                                    required> Male
+                                <input type="radio" name="gender" id="gender" class="p-2 border rounded-lg"
+                                    value="female" required> Female
+                            </div>
+
                             <div>
                                 <button type="submit"
                                     class="w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600">
@@ -62,8 +73,7 @@ Account Details
                 </div>
 
                 <!-- Linked Accounts Form -->
-                <div id="linked-accounts"
-                    class="tab-content {% if active_tab == 'linked' %}block{% else %}hidden{% endif %}">
+                <div id="linked-accounts" class="tab-content hidden">
                     <h2 class="text-2xl font-bold mb-4">Linked Accounts</h2>
                     <form method="post">
                         {% csrf_token %}
@@ -84,29 +94,43 @@ Account Details
                 </div>
 
                 <!-- Deactivate/Delete Form -->
-                <div id="deactivate-delete"
-                    class="tab-content {% if active_tab == 'deactivate' %}block{% else %}hidden{% endif %}">
+                <div id="deactivate-delete" class="tab-content hidden">
                     <h2 class="text-2xl font-bold mb-4">Deactivate/Delete</h2>
                     <form method="post">
                         {% csrf_token %}
                         <div class="space-y-4">
                             <div>
-                                <label for="nid" class="block text-gray-700">NID</label>
-                                <input type="text" name="nid" id="nid" class="w-full p-2 border rounded-lg"
-                                    value="{{ user.nid }}">
-                            </div>
-                            <div>
                                 <button type="submit"
                                     class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">
-                                    Deactivate Account
+                                    Delete Account
                                 </button>
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    function showTab(tabId) {
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.add('hidden');
+        });
+
+        // Show selected tab content
+        document.getElementById(tabId).classList.remove('hidden');
+
+        // Remove active styles from all tabs
+        document.querySelectorAll('.tab-link').forEach(link => {
+            link.classList.remove('bg-pink-200');
+        });
+
+        // Highlight the active tab
+        document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('bg-pink-200');
+    }
+</script>
 {% endblock %}
