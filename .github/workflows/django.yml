@@ -23,22 +23,19 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install PostgreSQL
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y postgresql postgresql-contrib
-        sudo service postgresql start
-        sudo -u postgres psql -c "CREATE DATABASE test_db;"
-        sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password';"
-        sudo -u postgres psql -c "ALTER ROLE test_user SET client_encoding TO 'utf8';"
-        sudo -u postgres psql -c "ALTER ROLE test_user SET default_transaction_isolation TO 'read committed';"
-        sudo -u postgres psql -c "ALTER ROLE test_user SET timezone TO 'UTC';"
-        sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE test_db TO test_user;"
-
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Set environment variables
+      run: |
+        echo "DB_NAME='defaultdb'" >> $GITHUB_ENV
+        echo "DB_USER='avnadmin'" >> $GITHUB_ENV
+        echo "DB_PASSWORD='AVNS_ZGun_pVu84A4xbJmZcx'" >> $GITHUB_ENV
+        echo "DB_HOST='pg-magnum00-blossom-poetry.c.aivencloud.com'" >> $GITHUB_ENV
+        echo "DB_PORT='22436'" >> $GITHUB_ENV
+        echo "SECRET_KEY='q6v9&z7x!j@p2l#d0w^r8s3m$g*t1b5y(kc%x+aoefu4hjn'" >> $GITHUB_ENV
 
     - name: Build Static
       run: |

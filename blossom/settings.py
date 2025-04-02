@@ -2,6 +2,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -78,6 +81,17 @@ WSGI_APPLICATION = 'blossom.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'defaultdb',  # Replace with your database name
+#         'USER': 'avnadmin',       # Replace with your PostgreSQL username
+#         'PASSWORD': 'AVNS_ZGun_pVu84A4xbJmZcx',   # Replace with your PostgreSQL password
+#         'HOST': 'pg-magnum00-blossom-poetry.c.aivencloud.com',           # Change if using a remote server
+#         'PORT': '22436',                # Default PostgreSQL port
+#     }
+# }
+
 
 DATABASES = {
     'default': {
@@ -131,7 +145,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Collects files here
 STATICFILES_DIRS = [
     BASE_DIR/ 'static'
 ]
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
