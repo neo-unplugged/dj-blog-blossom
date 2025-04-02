@@ -1,3 +1,6 @@
+import os
+from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from articles.models import Content
 from django.db.models import Q
@@ -100,3 +103,14 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def robots_txt(request):
+    robots_path = os.path.join(settings.BASE_DIR, "robots.txt")
+    
+    try:
+        with open(robots_path, "r") as file:
+            content = file.read()
+        return HttpResponse(content, content_type="text/plain")
+    except FileNotFoundError:
+        return HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")

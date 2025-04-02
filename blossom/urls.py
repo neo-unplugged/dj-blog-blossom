@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home_view, detail_view, create_view, search_view, account_view, signup_view, login_view, logout_view
+from .views import ( home_view, 
+                    detail_view, create_view, search_view, account_view, signup_view, 
+                    login_view, logout_view, robots_txt )
 from django.contrib.sitemaps.views import sitemap
 from articles.sitemaps import sitemaps
 
@@ -15,4 +17,5 @@ urlpatterns = [
     path('detail/<int:content_id>', detail_view, name="detail"),
     path('admin/', admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', robots_txt, name="robots"),
 ]
