@@ -7,7 +7,7 @@ staticfiles
 
 # deployment related
 .vercel/
-# .env
+.env
 
 # node related
 node_modules/
