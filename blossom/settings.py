@@ -81,17 +81,6 @@ WSGI_APPLICATION = 'blossom.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'defaultdb',  # Replace with your database name
-#         'USER': 'avnadmin',       # Replace with your PostgreSQL username
-#         'PASSWORD': 'AVNS_ZGun_pVu84A4xbJmZcx',   # Replace with your PostgreSQL password
-#         'HOST': 'pg-magnum00-blossom-poetry.c.aivencloud.com',           # Change if using a remote server
-#         'PORT': '22436',                # Default PostgreSQL port
-#     }
-# }
-
 
 DATABASES = {
     'default': {
@@ -138,13 +127,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Collects files here
 
 STATICFILES_DIRS = [
-    BASE_DIR/ 'static'
+    os.path.join(BASE_DIR, "static"),  # If you have custom static files
 ]
+
+STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

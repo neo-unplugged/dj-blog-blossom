@@ -1,3 +1,16 @@
-.github/
+# python related
 pyenv/
+__pycache__/
+
+# static files
+#staticfiles
+
+# deployment related
+.vercel/
+.env
+
+# node related
 node_modules/
+
+# db
+db.sqlite3
