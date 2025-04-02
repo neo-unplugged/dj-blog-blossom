@@ -29,10 +29,10 @@
                     <i class="fas fa-user-circle text-3xl"></i> <!-- FontAwesome Icon -->
                 </a>
                 <p class="text-white text-sm">Welcome, {{ user.username }}!</p>
-                <a href="{% url 'logout' %}" class="text-cyan-500 text-sm font-bold">Logout</a>
+                <a href="{% url 'logout' %}" class="text-sm">Logout</a>
             </div>
             {% else %}
-            <a href="{% url 'login' %}" class="text-cyan-500 text-sm font-bold">Login</a>
+            <a href="{% url 'login' %}" class="text-sm">Login</a>
             {% endif %}
         </div>
     </div>
